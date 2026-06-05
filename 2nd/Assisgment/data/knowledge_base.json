@@ -1,0 +1,102 @@
+[
+  {
+    "title": "LangGraph Overview",
+    "category": "LangChain/LangGraph",
+    "content": "LangGraph is a library built on top of LangChain for creating stateful, multi-actor applications with LLMs using graph-based workflows. It models agent logic as a directed graph where nodes are functions or agents and edges define control flow. Key features include cyclic graphs (unlike simple chains), persistent state across nodes, conditional branching, and human-in-the-loop support. LangGraph uses a StateGraph class where you define a TypedDict state, add nodes, add edges (including conditional edges), set an entry point, and compile the graph. It is ideal for building ReAct agents, multi-agent systems, and complex orchestration pipelines."
+  },
+  {
+    "title": "LangChain LCEL",
+    "category": "LangChain/LangGraph",
+    "content": "LangChain Expression Language (LCEL) is a declarative way to compose chains using the pipe operator |. A chain is built as: prompt | llm | output_parser. LCEL supports streaming, async execution, parallel branches using RunnableParallel, and retries. Key classes include RunnablePassthrough (pass input unchanged), RunnableLambda (wrap any function), and RunnableParallel (run multiple runnables concurrently). LCEL chains are lazy — they don't execute until .invoke(), .stream(), or .batch() is called. LCEL is the recommended way to build chains in modern LangChain versions (0.2+)."
+  },
+  {
+    "title": "RAG - Retrieval Augmented Generation",
+    "category": "NLP",
+    "content": "Retrieval-Augmented Generation (RAG) is a technique that enhances LLM responses by first retrieving relevant documents from a knowledge base and including them in the prompt context. The pipeline has two phases: indexing (load documents, split into chunks, embed chunks, store in vector database) and retrieval (embed query, similarity search, fetch top-k chunks, pass to LLM). Common vector stores include FAISS, Chroma, Pinecone, Weaviate, and Qdrant. Embeddings like OpenAI ada-002, sentence-transformers/all-MiniLM-L6-v2, or BGE models are used. RAG reduces hallucination and allows LLMs to access private or up-to-date knowledge without retraining."
+  },
+  {
+    "title": "FAISS Vector Store",
+    "category": "NLP",
+    "content": "FAISS (Facebook AI Similarity Search) is a library for efficient similarity search and clustering of dense vectors. It supports exact and approximate nearest neighbor search. In LangChain, FAISS.from_documents() creates an index from Document objects and embeddings. FAISS.load_local() and FAISS.save_local() persist the index to disk. The similarity_search(query, k=N) method returns the top N most similar documents. FAISS is best for in-memory vector search when the dataset fits in RAM. For larger datasets, approximate methods like IVF or HNSW indexes can be used."
+  },
+  {
+    "title": "Transformer Architecture",
+    "category": "Deep Learning",
+    "content": "The Transformer architecture, introduced in 'Attention Is All You Need' (2017), replaced RNNs for sequence modeling. Key components: (1) Multi-Head Self-Attention — each token attends to all other tokens, computing Q, K, V matrices; (2) Positional Encoding — since transformers have no recurrence, position info is injected via sinusoidal or learned encodings; (3) Feed-Forward Network — two linear layers with ReLU applied position-wise; (4) Layer Normalization and Residual Connections — for training stability. The encoder-decoder design uses cross-attention in the decoder. BERT uses encoder-only; GPT uses decoder-only; T5 uses encoder-decoder."
+  },
+  {
+    "title": "BERT - Bidirectional Encoder Representations from Transformers",
+    "category": "NLP",
+    "content": "BERT is a pre-trained transformer encoder model that uses masked language modeling (MLM) and next sentence prediction (NSP) objectives. Bidirectional means it attends to left and right context simultaneously. BERT is fine-tuned for tasks like text classification, NER, QA (extractive), and sentence similarity. Key variants: BERT-base (12 layers, 110M params), BERT-large (24 layers, 340M params), RoBERTa (no NSP, more data), DistilBERT (6 layers, 66M params, 97% performance). Sentence-BERT (SBERT) adapts BERT to produce sentence embeddings suitable for semantic similarity using siamese networks."
+  },
+  {
+    "title": "Large Language Models - GPT Family",
+    "category": "NLP",
+    "content": "GPT (Generative Pre-trained Transformer) models use a decoder-only transformer trained with next-token prediction (causal language modeling). GPT-2 (1.5B params) demonstrated emergent few-shot abilities. GPT-3 (175B params) showed strong in-context learning. GPT-4 is multimodal (text + images). These models are auto-regressive: at inference, tokens are generated one at a time, each conditioned on all previous tokens. Instruction tuning (RLHF, DPO) aligns models to follow instructions. Key concepts: temperature (randomness), top-p/top-k sampling, beam search, token window (context length)."
+  },
+  {
+    "title": "Random Forest Algorithm",
+    "category": "Machine Learning",
+    "content": "Random Forest is an ensemble method that builds multiple decision trees on bootstrap samples (bagging) and averages their predictions. For classification it uses majority vote; for regression it averages outputs. At each node split, only a random subset of features (sqrt(n_features) for classification, n_features/3 for regression) is considered — this decorrelates trees and reduces variance. Key hyperparameters: n_estimators (number of trees), max_depth, min_samples_split, max_features. Random Forest handles missing values, is robust to outliers, provides feature importance scores (mean decrease in impurity). Scikit-learn implements it via RandomForestClassifier and RandomForestRegressor."
+  },
+  {
+    "title": "Gradient Boosting and XGBoost",
+    "category": "Machine Learning",
+    "content": "Gradient Boosting builds an ensemble of weak learners (usually decision trees) sequentially, where each tree corrects errors of the previous ensemble by fitting residuals. It minimizes a loss function using gradient descent in function space. XGBoost (eXtreme Gradient Boosting) adds: (1) L1/L2 regularization to reduce overfitting; (2) column subsampling; (3) approximate tree splitting; (4) hardware optimization (cache-aware, out-of-core). Key hyperparameters: n_estimators, learning_rate (shrinkage), max_depth, subsample, colsample_bytree, gamma (min loss split), lambda/alpha (regularization). LightGBM and CatBoost are fast alternatives."
+  },
+  {
+    "title": "Neural Network Fundamentals",
+    "category": "Deep Learning",
+    "content": "A neural network consists of layers of neurons. Each neuron computes: output = activation(W·x + b). Forward pass propagates inputs through layers; backpropagation computes gradients using chain rule; optimization updates weights (SGD, Adam, RMSprop). Key activation functions: ReLU (max(0,x), default hidden), Sigmoid (0-1 output, binary classification), Softmax (multi-class output), GELU (used in transformers). Regularization techniques: dropout (randomly zero neurons during training), batch normalization (normalize layer inputs), L2 weight decay. Vanishing gradient problem is addressed by ReLU, residual connections, and careful initialization (Xavier, He)."
+  },
+  {
+    "title": "Embeddings and Semantic Search",
+    "category": "NLP",
+    "content": "Embeddings are dense vector representations of text where semantically similar texts have vectors close in space (cosine similarity or dot product). Word2Vec uses skip-gram or CBOW to learn word embeddings from co-occurrence. GloVe uses global co-occurrence statistics. Modern sentence embeddings from models like sentence-transformers encode entire sentences/paragraphs. Embedding dimension is typically 384–1536. Semantic search retrieves documents by embedding similarity rather than keyword matching. Sentence-BERT (SBERT) with all-MiniLM-L6-v2 (384-dim) is fast and accurate for semantic search tasks. OpenAI text-embedding-3-small (1536-dim) is a popular API-based option."
+  },
+  {
+    "title": "Model Evaluation Metrics",
+    "category": "Machine Learning",
+    "content": "Classification metrics: Accuracy (correct/total), Precision (TP/(TP+FP)), Recall/Sensitivity (TP/(TP+FN)), F1-Score (harmonic mean of P and R), ROC-AUC (area under ROC curve), PR-AUC (better for imbalanced classes). Regression metrics: MAE (mean absolute error), MSE (mean squared error), RMSE, R² (explained variance, 1 is perfect). For NLP: BLEU (n-gram precision vs reference), ROUGE (recall-based for summarization), BERTScore (semantic similarity using BERT). Confusion matrix shows TP, TN, FP, FN. Cross-validation (k-fold) gives robust performance estimates. Always use held-out test set for final evaluation."
+  },
+  {
+    "title": "Pandas - Data Manipulation",
+    "category": "Python Data Science",
+    "content": "Pandas is the primary Python library for tabular data manipulation. Key data structures: DataFrame (2D labeled table) and Series (1D labeled array). Core operations: read_csv/read_excel for loading; df.head(), df.info(), df.describe() for exploration; df[col], df.loc[row, col], df.iloc[row, col] for selection; df.groupby(col).agg() for aggregation; df.merge(df2, on=col) for joins; df.pivot_table() for reshaping; df.dropna(), df.fillna() for missing values; df.apply(func) for row/column transforms. Pandas 2.0 uses Arrow-backed dtypes for better performance. For large datasets consider Polars or Dask."
+  },
+  {
+    "title": "Scikit-learn Pipeline",
+    "category": "Python Data Science",
+    "content": "Scikit-learn Pipeline chains preprocessing steps and a final estimator into one object, preventing data leakage by fitting transformers only on training data. Example: Pipeline([('scaler', StandardScaler()), ('pca', PCA(n_components=10)), ('clf', LogisticRegression())]). ColumnTransformer applies different transforms to different columns. GridSearchCV and RandomizedSearchCV perform hyperparameter tuning with cross-validation on the full pipeline. Key transformers: StandardScaler (z-score), MinMaxScaler (0-1), OneHotEncoder, LabelEncoder, SimpleImputer (missing values), PolynomialFeatures. Pipeline.fit(X_train) and Pipeline.predict(X_test) are the core methods."
+  },
+  {
+    "title": "Attention Mechanism",
+    "category": "Deep Learning",
+    "content": "Attention allows a model to focus on relevant parts of the input when producing an output. Scaled Dot-Product Attention: Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) * V, where Q=queries, K=keys, V=values, d_k=key dimension. Multi-Head Attention runs h attention heads in parallel on projected subspaces, concatenates results, and projects back. Self-attention means Q, K, V all come from the same sequence. Cross-attention (in decoder) has Q from decoder, K/V from encoder output. Flash Attention is an optimized CUDA implementation reducing memory from O(n²) to O(n). Attention patterns can be analyzed for interpretability."
+  },
+  {
+    "title": "Fine-tuning vs Prompt Engineering",
+    "category": "NLP",
+    "content": "Prompt engineering shapes model behavior through careful input design without changing weights. Techniques: zero-shot (no examples), few-shot (k examples in prompt), chain-of-thought (ask model to reason step-by-step), system prompts (role instructions). Fine-tuning trains model weights on task-specific data — supervised fine-tuning (SFT), RLHF, DPO. Parameter-efficient fine-tuning (PEFT) methods: LoRA (low-rank adapter matrices inserted in attention layers), QLoRA (quantized LoRA for memory efficiency), prefix-tuning, adapter layers. Fine-tuning wins when: consistent output format needed, domain-specific knowledge required, prompt length constraints are critical, or high volume inference costs dominate."
+  },
+  {
+    "title": "Data Preprocessing Pipeline",
+    "category": "Machine Learning",
+    "content": "Standard preprocessing steps: (1) Data loading and exploration — df.info(), df.describe(), check class balance; (2) Handle missing values — impute median/mean for numeric, mode/constant for categorical, or drop; (3) Feature encoding — OneHotEncoder for nominal, OrdinalEncoder for ordinal, target encoding for high cardinality; (4) Feature scaling — StandardScaler for linear models/neural nets, not needed for trees; (5) Feature engineering — polynomial features, interactions, domain-specific transforms; (6) Outlier handling — clip at 1.5*IQR or use robust scalers; (7) Train/val/test split — stratified for classification; (8) Class imbalance — SMOTE oversampling, class_weight='balanced', or undersampling."
+  },
+  {
+    "title": "Convolutional Neural Networks",
+    "category": "Deep Learning",
+    "content": "CNNs apply learnable convolutional filters over input to detect local patterns (edges, textures, objects). Key layers: Conv2d (applies filters, produces feature maps), ReLU activation, MaxPooling2d (downsamples, reduces spatial size), BatchNorm2d (normalizes), Flatten, Linear. Hyperparameters: kernel_size (filter size), stride, padding (same=preserve size, valid=reduce). Popular architectures: VGG (deep, 3x3 convolutions), ResNet (residual connections for very deep networks), EfficientNet (compound scaling). Transfer learning: load pre-trained ImageNet weights, freeze early layers, fine-tune later layers + classifier head. In PyTorch: nn.Conv2d(in_channels, out_channels, kernel_size)."
+  },
+  {
+    "title": "Reinforcement Learning Basics",
+    "category": "Machine Learning",
+    "content": "Reinforcement Learning (RL) trains an agent to maximize cumulative reward through interaction with an environment. Core concepts: Agent, Environment, State (s), Action (a), Reward (r), Policy π(a|s) (action probability given state), Value function V(s) (expected future reward from state), Q-function Q(s,a) (expected reward from state-action pair). Key algorithms: Q-Learning (tabular, off-policy), DQN (Deep Q-Network, uses neural net for Q-function), Policy Gradient (REINFORCE, directly optimize policy), Actor-Critic (A2C, A3C, PPO — combine policy + value networks). PPO (Proximal Policy Optimization) is widely used including in RLHF for LLM alignment."
+  },
+  {
+    "title": "LangChain Agents and Tools",
+    "category": "LangChain/LangGraph",
+    "content": "LangChain agents use an LLM to decide which tools to call and in what order to answer a query. Tools are functions with a name, description, and input schema. The ReAct pattern (Reasoning + Acting) has the LLM alternate between Thought (reasoning), Action (tool call), Observation (tool result), and Final Answer. Key tool types: TavilySearchResults (web search), WikipediaQueryRun, PythonREPLTool, SQLDatabaseToolkit, CustomTool (via @tool decorator or StructuredTool.from_function). AgentExecutor wraps the agent loop. Modern approach: use LangGraph for agent orchestration instead of AgentExecutor for better control and observability."
+  }
+]
